@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.androidstudy.mpesa"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation deps.support.appcompat
+    implementation deps.support.design
+    implementation deps.support.support
+
+    implementation deps.support.constraintLayout
+    //Butterknife - Bind Views
+    implementation deps.butterknife.core
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    //I noticed this issue and add this
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    annotationProcessor deps.butterknife.compiler
+    //Log - Replace the Android Log Class
+    // implementation deps.timber
+    //My Lib -> Monitor Internet Connectivity
+    implementation deps.networkmanager
+    //Retrofit - Network Client
+    implementation deps.retrofit.core
+    implementation deps.retrofit.gsonConverter
+    //OKHTTP3
+    implementation deps.okhttp3.core
+    implementation deps.okhttp3.interceptor
+
+    //Testing !!!
+    testImplementation 'junit:junit:4.12'
+
+    //The Daraja Library
+    implementation project(':daraja')
+}
